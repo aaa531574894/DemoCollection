@@ -18,7 +18,24 @@
 
 	<modules>
 		<module>demo-netty</module>
+		<module>demo-arithmetic</module>
 	</modules>
+
+
+
+	<!--所有子项目通用的依赖-->
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+	</dependencies>
 
 
 

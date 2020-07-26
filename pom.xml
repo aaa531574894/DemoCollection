@@ -19,6 +19,7 @@
 	<modules>
 		<module>demo-netty</module>
 		<module>demo-arithmetic</module>
+		<module>demo-threadpool</module>
 	</modules>
 
 

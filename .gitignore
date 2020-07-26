@@ -5,7 +5,7 @@
 
 
 *.class
-target/*
 out/*
 
-/demo-netty/target/classes/META-INF/demo-netty.kotlin_module
+
+*/target/classes/*

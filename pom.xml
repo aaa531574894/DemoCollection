@@ -21,6 +21,7 @@
 		<module>demo-arithmetic</module>
 		<module>demo-threadpool</module>
 		<module>demo-redis</module>
+		<module>demo-rabbitmq</module>
 	</modules>
 
 

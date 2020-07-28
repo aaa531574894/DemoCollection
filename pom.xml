@@ -20,6 +20,7 @@
 		<module>demo-netty</module>
 		<module>demo-arithmetic</module>
 		<module>demo-threadpool</module>
+		<module>demo-redis</module>
 	</modules>
 
 

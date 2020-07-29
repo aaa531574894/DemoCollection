@@ -40,14 +40,45 @@ direct模式的升级版本，多个消费着从队列中读，有公平分发�
 
 <img src="./src/main/resources/images/topic_mode.jpg" alt="work queue" style="zoom: 50%;" />
 
-> *代表一个单词
+> *****代表匹配一个单词，如  *.log，可以匹配  order.log、product.log等routingkey；但history.order.log，log 这种非两个单词的routingkey是无法匹配的。
 >
-> #代表0到多个单词
+> **#**代表0到多个单词，如 #.log，可以匹配任意以log结尾的routingkey，例如：a.b.log   a.log   log；
+>
+> **注**：多个单词之间必须以 .  分割
+>
+> ***特殊的***：当exchange配合 routingkey = #号时，此时topic的模式等同于fanout模式；routingkey=中不包含* 或 #，即全量匹配时，topic模式等于routing模式
+
+#### 6.几种模式的对比
+
+|         比较项         | direct | workQueue | fanout | routing | topic |
+| :--------------------: | :----: | :-------: | :----: | :-----: | :---: |
+|    是否使用exchange    |   ×    |     ×     |   √    |    √    |   √   |
+| 是否支持routingkey匹配 |   √    |     √     |   ×    |    √    |   √   |
+|   是否支持表达式匹配   |   ×    |     ×     |   ×    |    ×    |   √   |
+
+
+
+### 三、应用场景
+
+#### 1、异步
+
+* 注册机制，注册后发短信与邮件可以通过异步队列通知的方式。
+* 
+
+#### 2、应用解耦
+
+#### 3、流量削峰
+
+
+
+
+
+
 
 ***
 
 
-### 三、springboot中使用RabbitMQ
+### 四、springboot中使用RabbitMQ
 
 #### 1.引入maven依赖
 
@@ -58,6 +89,10 @@ direct模式的升级版本，多个消费着从队列中读，有公平分发�
 </dependency>
 ```
  这个starter依赖包含spring-amqp与spring-rabbit两个模块
+
+
+
+
 
 #### 2.配置文件
 
@@ -141,7 +176,7 @@ spring amqp在*org.springframework.amqp.core*包中为我们提供了对amqp协�
 
 
 ****
-### 四、RabbitMQ安装过程(基于centos7) [参考](https://www.cnblogs.com/fengyumeng/p/11133924.html)
+### 五、RabbitMQ安装过程(基于centos7) [参考](https://www.cnblogs.com/fengyumeng/p/11133924.html)
 > 此次安装的版本为 rabbitMQ-3.8.5; erlang 23.0
 RabbitMq基于erlang开发，所以需要先安装erlang环境。[erlang官网](https://www.erlang.org/downloads)  
 

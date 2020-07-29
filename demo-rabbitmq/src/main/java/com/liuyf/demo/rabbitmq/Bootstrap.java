@@ -12,6 +12,7 @@ import org.springframework.context.ApplicationContext;
  */
 
 @SpringBootApplication
+
 public class Bootstrap {
 
     public static void main(String[] args) {

@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.HashMap;
 
 /**
- * please add the description
+ * headers 模式的配置,上一个配置类太乱了 ,新建一个
  * <p>
  * <p>
  * Created by liuyf on 2020/7/30.

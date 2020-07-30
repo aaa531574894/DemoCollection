@@ -173,15 +173,20 @@ direct模式的升级版本，多个消费着从队列中读，有公平分发�
 
 #### 6.header 
 
+topic交换的升级版，不使用routingkey了，而是使用exchange+ headerMap的方式进行路由交换。通过binding声明queue与exchange的绑定关系，exchange将消息的header中满足条件的消息转发到对应的queue中。
+
+#### 7.rpc模式
 
 
-#### 7.几种模式的对比
 
-|         比较项         | direct change | workQueue | fanout | routing | topic  |
-| :--------------------: | :-----------: | :-------: | :----: | :-----: | :----: |
-|      exchange类型      |     默认      |   默认    | 自定义 | 自定义  | 自定义 |
-| 是否支持routingkey匹配 |       √       |     √     |   ×    |    √    |   √    |
-|   是否支持表达式匹配   |       ×       |     ×     |   ×    |    ×    |   √    |
+#### 8.几种模式的对比
+
+|         比较项         | direct change | workQueue | fanout | routing | topic  | header |
+| :--------------------: | :-----------: | :-------: | :----: | :-----: | :----: | ------ |
+|      exchange类型      |     默认      |   默认    | 自定义 | 自定义  | 自定义 | 自定义 |
+| 是否支持routingkey匹配 |       √       |     √     |   ×    |    √    |   √    | ×      |
+|   是否支持表达式匹配   |       ×       |     ×     |   ×    |    ×    |   √    | ×      |
+| 是否支持消息header匹配 |       ×       |     ×     |   ×    |    ×    |   ×    | √      |
 
 
 
@@ -261,7 +266,12 @@ spring amqp在*org.springframework.amqp.core*包中为我们提供了对amqp协�
 
   
 
-* Exchange 
+* Exchange  spring将其抽象为接口，具体有这几种实现类：
+
+  > * DirectiveExchange
+  > * FanoutExchange
+  > * TopicExchange
+  > * HeadersExchange
 
 * Queue
 
@@ -270,7 +280,7 @@ spring amqp在*org.springframework.amqp.core*包中为我们提供了对amqp协�
   			@Nullable Map<String, Object> arguments)
   ```
 
-* Binding    BindingBuilder 
+* Binding    BindingBuilder  用来告诉broker，queue与exchange的绑定关系，即何时exchange应该把消息转发到这个队列中。
 
   ```java
   //DirectExchange  

@@ -1,12 +1,9 @@
-package com.liuyf.demo.rabbitmq.mode.direct;
+package com.liuyf.demo.rabbitmq.annotationdrive.direct;
 
-import com.liuyf.demo.rabbitmq.config.RabbitConfig;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.util.net.TLSClientHelloExtractor;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;

@@ -1,14 +1,21 @@
 package com.liuyf.demo.rabbitmq.config;
 
+import com.liuyf.demo.rabbitmq.programlly.header.WorkqueueMode;
+import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.amqp.core.AmqpAdmin;
 import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
+import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 /**
  * please add the description
@@ -28,6 +35,7 @@ public class RabbitConfig {
     }
 
     @Bean
+    @Primary
     public ConnectionFactory connectionFactory() {
         CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
         connectionFactory.setUsername("liuyf");
@@ -79,13 +87,13 @@ public class RabbitConfig {
 
     //routing mode
     public final static String ROUTING_MODE = "LoggerRouter";
+
     @Bean(name = ROUTING_MODE)
     public AmqpTemplate template4(ConnectionFactory connectionFactory) {
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
         rabbitTemplate.setExchange(ROUTING_MODE);
         return rabbitTemplate;
     }
-
 
 
     //topic mode
@@ -95,4 +103,56 @@ public class RabbitConfig {
         rabbitTemplate.setExchange("TOPICS");
         return rabbitTemplate;
     }
+
+
+    @Bean(work_queue_plush)
+    public AmqpTemplate template6(ConnectionFactory connectionFactory) {
+        RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
+        rabbitTemplate.setRoutingKey(work_queue_plush);
+        rabbitTemplate.setExchange("");
+        return rabbitTemplate;
+    }
+
+
+    public final static String work_queue_plush = "work_queue_plush";
+
+    @Bean(work_queue_plush)
+    public SimpleMessageListenerContainer factoryCreatedContainerNoListener(
+            SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory,
+            @Autowired WorkqueueMode.MsgListener listener) {
+        SimpleMessageListenerContainer container = rabbitListenerContainerFactory.createListenerContainer();
+        container.setMessageListener(listener);
+        container.setAcknowledgeMode(AcknowledgeMode.MANUAL);
+        container.setQueueNames(work_queue_plush);
+        container.setPrefetchCount(1);
+        return container;
+    }
+
+    public final static String work_queue_plush_2 = "work_queue_plush_2";
+
+    @Bean(work_queue_plush_2)
+    public SimpleMessageListenerContainer factoryCreatedContainerNoListener2(
+            SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory,
+            @Autowired WorkqueueMode.MsgListener2 listener) {
+        SimpleMessageListenerContainer container = rabbitListenerContainerFactory.createListenerContainer();
+        container.setMessageListener(listener);
+        container.setAcknowledgeMode(AcknowledgeMode.MANUAL);
+        container.setQueueNames(work_queue_plush);
+        container.setPrefetchCount(1);
+        return container;
+    }
+
+
+    @Bean
+    public Queue queue1() {
+        return new Queue(work_queue_plush);
+    }
+
+
+    @Bean
+    public SimpleMessageListenerContainer containerFactory(ConnectionFactory connectionFactory) {
+        return new SimpleMessageListenerContainer(connectionFactory);
+    }
+
+
 }

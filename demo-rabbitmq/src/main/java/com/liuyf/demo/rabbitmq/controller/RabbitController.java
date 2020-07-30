@@ -1,12 +1,13 @@
 package com.liuyf.demo.rabbitmq.controller;
 
-import com.liuyf.demo.rabbitmq.mode.direct.DirectMode;
-import com.liuyf.demo.rabbitmq.mode.fanout.FanoutMode;
-import com.liuyf.demo.rabbitmq.mode.routing.RoutingMode;
-import com.liuyf.demo.rabbitmq.mode.topic.TopicMode;
-import com.liuyf.demo.rabbitmq.mode.workqueue.WorkQueueMode;
+import com.liuyf.demo.rabbitmq.annotationdrive.direct.DirectMode;
+import com.liuyf.demo.rabbitmq.annotationdrive.fanout.FanoutMode;
+import com.liuyf.demo.rabbitmq.annotationdrive.routing.RoutingMode;
+import com.liuyf.demo.rabbitmq.annotationdrive.topic.TopicMode;
+import com.liuyf.demo.rabbitmq.annotationdrive.workqueue.WorkQueueMode;
+import com.liuyf.demo.rabbitmq.bean.Order;
+import com.liuyf.demo.rabbitmq.programlly.header.WorkqueueMode;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,9 +42,13 @@ public class RabbitController {
     @Autowired
     private WorkQueueMode.Provider queueMode;
 
+    int i = 0;
     //@Scheduled(fixedRate = 300)
     public void log_2() {
-        queueMode.send("你好: " + LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+        if (i < 30) {
+            queueMode.send(" 消息---- " + i++);
+        }
+
     }
 
 
@@ -57,7 +62,7 @@ public class RabbitController {
     }
 
 
-    //fanout 模式, 广播模式
+    //fanout 模式
     @Autowired
     private RoutingMode.Provider routingModeProvider;
 
@@ -72,7 +77,7 @@ public class RabbitController {
     @Autowired
     private TopicMode.Provider tpProvider;
 
-    @Scheduled(fixedRate = 300)
+    //@Scheduled(fixedRate = 300)
     public void log_5() {
         if (atomicInteger.incrementAndGet() % 2 != 0) {
             tpProvider.publishOrder("发布订单消息");
@@ -81,4 +86,19 @@ public class RabbitController {
     }
 
 
+    int j = 0;
+    //测试workqueue模式下   对象流的消息  与  container模式
+    @Autowired
+    WorkqueueMode.Provider SDFSDF;
+    //@Scheduled(fixedRate = 200)
+    public void log_6() throws Exception {
+        if (j++ < 30) {
+            Order order = new Order();
+            order.setOrderId(Integer.parseInt("000000" + j));
+            order.setCustomerName("客户" + j);
+            SDFSDF.send(order);
+        }
+
+
+    }
 }

@@ -1,4 +1,4 @@
-package com.liuyf.demo.rabbitmq.mode.fanout;
+package com.liuyf.demo.rabbitmq.annotationdrive.fanout;
 
 import com.liuyf.demo.rabbitmq.config.RabbitConfig;
 import lombok.extern.slf4j.Slf4j;
@@ -37,11 +37,9 @@ public class FanoutMode {
                                             .build();
             amqpTemplate.send(message);
             log.info("已发送:" + msg);
-        }
+         }
 
     }
-
-
 
 
     @Component
@@ -68,7 +66,7 @@ public class FanoutMode {
 
         @RabbitListener(
                 bindings = @QueueBinding(
-                        value = @Queue,
+                        value = @Queue(name = "durableFanoutQueue"),
                         exchange = @Exchange(
                                 value = RabbitConfig.FAN_OUT_MODE,
                                 type = "fanout")))
@@ -76,6 +74,21 @@ public class FanoutMode {
 
             log.info("cosumer 2 ----" + str);
 
+        }
+    }
+
+
+    @Component
+    @Slf4j
+    public static class Consumer3 {
+        @RabbitListener(
+                bindings = @QueueBinding(
+                        value = @Queue(name = "durableFanoutQueue"),
+                        exchange = @Exchange(
+                                value = RabbitConfig.FAN_OUT_MODE,
+                                type = "fanout")))
+        public void recv(String str) {
+            log.info("cosumer 3 ----" + str);
         }
     }
 

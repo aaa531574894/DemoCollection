@@ -1,4 +1,4 @@
-package com.liuyf.demo.rabbitmq.mode.routing;
+package com.liuyf.demo.rabbitmq.annotationdrive.routing;
 
 import com.liuyf.demo.rabbitmq.config.RabbitConfig;
 import lombok.extern.slf4j.Slf4j;

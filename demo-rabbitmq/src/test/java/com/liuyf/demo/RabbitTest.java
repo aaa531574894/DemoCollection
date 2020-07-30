@@ -1,7 +1,7 @@
 package com.liuyf.demo;
 
 import com.liuyf.demo.rabbitmq.Bootstrap;
-import com.liuyf.demo.rabbitmq.mode.direct.DirectMode;
+import com.liuyf.demo.rabbitmq.annotationdrive.direct.DirectMode;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,4 +1,4 @@
-package com.liuyf.demo.rabbitmq.mode.topic;
+package com.liuyf.demo.rabbitmq.annotationdrive.topic;
 
 
 import lombok.extern.slf4j.Slf4j;

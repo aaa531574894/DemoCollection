@@ -1,4 +1,4 @@
-package com.liuyf.demo.rabbitmq.mode.workqueue;
+package com.liuyf.demo.rabbitmq.annotationdrive.workqueue;
 
 import com.liuyf.demo.rabbitmq.config.RabbitConfig;
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +36,7 @@ public class WorkQueueMode {
                                                                                    .build())
                                             .build();
             amqpTemplate.send(message);
-            log.info(this + "已发送:" + msg);
+            //log.info(this + "已发送:" + msg);
         }
 
 

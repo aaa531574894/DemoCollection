@@ -6,10 +6,9 @@ import com.liuyf.demo.rabbitmq.annotationdrive.routing.RoutingMode;
 import com.liuyf.demo.rabbitmq.annotationdrive.topic.TopicMode;
 import com.liuyf.demo.rabbitmq.annotationdrive.workqueue.WorkQueueMode;
 import com.liuyf.demo.rabbitmq.bean.Order;
-import com.liuyf.demo.rabbitmq.programlly.header.WorkqueueMode;
+import com.liuyf.demo.rabbitmq.programlly.workQueue.WorkqueueMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;

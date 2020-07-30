@@ -1,9 +1,8 @@
-package com.liuyf.demo.rabbitmq.programlly.header;
+package com.liuyf.demo.rabbitmq.programlly.workQueue;
 
 import com.liuyf.demo.rabbitmq.bean.Order;
 import com.liuyf.demo.rabbitmq.config.RabbitConfig;
 import com.rabbitmq.client.Channel;
-import javafx.beans.binding.ObjectExpression;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.listener.api.ChannelAwareMessageListener;

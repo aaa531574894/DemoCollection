@@ -1,6 +1,6 @@
 package com.liuyf.demo.rabbitmq.config;
 
-import com.liuyf.demo.rabbitmq.programlly.header.WorkqueueMode;
+import com.liuyf.demo.rabbitmq.programlly.workQueue.WorkqueueMode;
 import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.amqp.core.AmqpAdmin;
 import org.springframework.amqp.core.AmqpTemplate;

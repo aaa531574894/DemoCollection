@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    wggl:
+      jdbc-url: jdbc:oracle:thin:@10.10.147.210:1521:TESTDB001
+      username: wggl
+      password: shpboss_bcv19
+      driver-class-name: oracle.jdbc.driver.OracleDriver
+
+    cmkt:
+      jdbc-url: jdbc:oracle:thin:@(DESCRIPTION_LIST=(LOAD_BALANCE=off)(FAILOVER=on)(DESCRIPTION=(ADDRESS_LIST=(LOAD_BALANCE=OFF)(FAILOVER=ON)(ADDRESS=(PROTOCOL=TCP)(HOST=10.10.140.221)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=oragis)(Instance_name=oragis)(FAILOVER_MODE=(TYPE=session)(METHOD=basic)(RETRIES=4)(DELAY=1))))(DESCRIPTION=(ADDRESS_LIST=(LOAD_BALANCE=OFF)(FAILOVER=ON)(ADDRESS=(PROTOCOL=TCP)(HOST=10.10.140.221)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=oragis)(Instance_name=oragis)(FAILOVER_MODE=(TYPE=session)(METHOD=basic)(RETRIES=4)(DELAY=1)))))
+      username: kt_cfg
+      password: kt_cfg123
+      driver-class-name: oracle.jdbc.driver.OracleDriver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    database: oracle
+    show-sql: true
+

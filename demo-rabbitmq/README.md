@@ -177,7 +177,13 @@ topic交换的升级版，不使用routingkey了，而是使用exchange+ headerM
 
 #### 7.rpc模式
 
+<img src="./src/main/resources/images/rpc.jpg" alt="work queue" style="zoom: 50%;" />
 
+客户端发送请求时需要在消息中带两个参数：
+
+> replyTo      ： 返回至哪个队列
+>
+> correlationId    唯一请求id，
 
 #### 8.几种模式的对比
 

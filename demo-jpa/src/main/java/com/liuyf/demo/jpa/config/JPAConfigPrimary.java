@@ -42,14 +42,14 @@ public class JPAConfigPrimary {
 
     private Properties additionalProperties(){
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+        properties.setProperty("hibernate.hbm2ddl.auto", "validate");
         properties.setProperty("hibernate.show_sql", "true");
         properties.setProperty("hibernate.format_sql", "true");
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
 
-        properties.setProperty("javax.persistence.schema-generation.create-source", "metadata");  //
+        /*properties.setProperty("javax.persistence.schema-generation.create-source", "metadata");  //
         properties.setProperty("javax.persistence.schema-generation.scripts.action", "create");   //生成建表脚本
-        properties.setProperty("javax.persistence.schema-generation.scripts.create-target", "../create.sql");  //脚本导出位置
+        properties.setProperty("javax.persistence.schema-generation.scripts.create-target", "../create.sql");  //脚本导出位置*/
 
         return properties;
     }

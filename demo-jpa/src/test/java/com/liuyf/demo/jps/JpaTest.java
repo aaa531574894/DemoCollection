@@ -1,8 +1,6 @@
 package com.liuyf.demo.jps;
 
 import com.liuyf.demo.jpa.SpringbootApplication;
-import com.liuyf.demo.jpa.dao.primary.ProductRepo;
-import com.liuyf.demo.jpa.entity.primary.Product;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -36,14 +34,5 @@ public class JpaTest {
     }
 
 
-    @Autowired
-    private ProductRepo productRepo;
-    @Test
-    public void TestJpaInsert(){
-        Product product = new Product();
-        product.setProductId(124L);
-        product.setProductName("测试商品1");
-        productRepo.save(product);
 
-    }
 }

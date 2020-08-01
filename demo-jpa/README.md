@@ -255,6 +255,19 @@ spring data jpa 对auto-ddl提供了4中选项，配置方式参考前面代码�
 
 
 
+@Column注解
+
+```java
+//@Column可以声明字段与数据库表之间的映射关系，默认的，使用字段名与表字段进行关联；如果实体字段与数据库字段有出入，可以在column中的name属性作声明。需要特别注意的是，column中有个columnDefination属性，通过这个属性，相当于在建表时直接在字段后面加了约束，可以声明字段类型，约束，注释等等；通过这种方式我们可以更加细粒度的控制数据库表结构。eg：
+@Column(name = "last_update_time" , columnDefinition = " datetime(6) comment '最后更新时间' ")
+	private Date lastUpdateTime;
+
+//等价于
+//create table xxx {
+//    last_update_time datetime(6) comment '最后更新时间'
+//};
+```
+
 
 
 

@@ -1,4 +1,6 @@
-package com.liuyf.demo.jpa.entity.wggl;
+package com.liuyf.demo.jpa.entity.secondary;
+
+import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,10 +16,11 @@ import java.sql.Date;
  */
 
 @Entity
-@Table( name = "TEST_ORDER")
-public class Order {
+@Data
+@Table( name = "BOOK_ORDER")
+public class BookOrder {
     @Id
-    @GeneratedValue
+    //@GeneratedValue
     private long orderId;
     private String oderName;
     private String handler;

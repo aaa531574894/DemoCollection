@@ -1,20 +1,18 @@
 spring:
-  datasource:
-    wggl:
-      jdbc-url: jdbc:oracle:thin:@10.10.147.210:1521:TESTDB001
-      username: wggl
-      password: shpboss_bcv19
-      driver-class-name: oracle.jdbc.driver.OracleDriver
+  #数据源a 配置
+  primary-datasource:
+    jdbc-url: jdbc:mysql://localhost:3306/test_db_a?useUnicode=true&characterEncoding=UTF-8
+    username: test_mysql_a
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  #数据源b配置
+  secondary-datasource:
+    jdbc-url: jdbc:mysql://localhost:3306/test_db_b?useUnicode=true&characterEncoding=UTF-8
+    username: test_mysql_b
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
-    cmkt:
-      jdbc-url: jdbc:oracle:thin:@(DESCRIPTION_LIST=(LOAD_BALANCE=off)(FAILOVER=on)(DESCRIPTION=(ADDRESS_LIST=(LOAD_BALANCE=OFF)(FAILOVER=ON)(ADDRESS=(PROTOCOL=TCP)(HOST=10.10.140.221)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=oragis)(Instance_name=oragis)(FAILOVER_MODE=(TYPE=session)(METHOD=basic)(RETRIES=4)(DELAY=1))))(DESCRIPTION=(ADDRESS_LIST=(LOAD_BALANCE=OFF)(FAILOVER=ON)(ADDRESS=(PROTOCOL=TCP)(HOST=10.10.140.221)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=oragis)(Instance_name=oragis)(FAILOVER_MODE=(TYPE=session)(METHOD=basic)(RETRIES=4)(DELAY=1)))))
-      username: kt_cfg
-      password: kt_cfg123
-      driver-class-name: oracle.jdbc.driver.OracleDriver
 
-  jpa:
-    hibernate:
-      ddl-auto: create
-    database: oracle
-    show-sql: true
+
+
 

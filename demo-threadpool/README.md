@@ -2,7 +2,7 @@
 1 测试线程池的用法，包括：
    * ThreadPoolExecutor的用法
    * jdk7新引入的ForkJoinPool的用法
-   
+
 2 测试异步与回调，弄清楚以下几个问题：
    * Runnable Callable Future RunableFuture  FutureTask的 区别与联系
 
@@ -65,13 +65,7 @@ ThreadPoolExecutor内部的submit() 方法将传入的参数都封装为了Futur
 
 
 
+#### 最后贴出线程池的脑图
 
-
-
-
-
-
-
-
-
+![RuunableFuture](./src/main/resources/1.png)
 

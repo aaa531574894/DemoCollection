@@ -15,7 +15,7 @@ public class EightTypeSorting {
 
     public static void main(String[] args) {
 
-        int length = 30;
+        int length = 50;
         int[] testData2 = new int[length];
         Random randomNumber = new Random();
         for (int i = 0; i < length; i++) {
@@ -363,15 +363,15 @@ public class EightTypeSorting {
 
     // 0 1 2 3 4 5 6  2
     private static Integer bs(int[] array, int start, int end ,int value) {
+        if(start>end) return null;
 
         int middleIndex = (start + end) / 2;
-        if(array[middleIndex] == value) return middleIndex;
-        if(start == end) return null;
-
-        if (array[middleIndex] > value) {
-            end = middleIndex;
+        if(array[middleIndex] == value) {
+            return middleIndex;
+        }else if (array[middleIndex] > value) {
+            end = middleIndex-1;
         }else {
-            start = middleIndex;
+            start = middleIndex+1;
         }
         return bs(array, start, end, value);
     }

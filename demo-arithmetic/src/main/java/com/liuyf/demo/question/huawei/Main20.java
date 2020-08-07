@@ -17,7 +17,7 @@ import java.util.Set;
 public class Main20 {
 
     public static void main(String[] args) {
-        int month = 10;
+        int month = 24;
         handleInListenerMode(month);
         handleWithIterator(month);
 

@@ -10,3 +10,5 @@ out/*
 
 */target/classes/*
 */target/*
+/demo-spring/spring-validation/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+/demo-spring/spring-validation/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst

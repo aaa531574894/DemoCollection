@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liuyf.demo.mybatis.mapper.primary.CityMapper">
+
+
+ 	<select id="queryCityByPage" resultType="com.liuyf.demo.mybatis.PO.City">
+	    select * from city lock  in share mode
+    </select>
+
+
+	<!-- 使用表的自增主键-->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+ 	 	 insert into city (name , countryCode, district, population)
+ 		 values (#{name},#{countryCode},#{district},#{population})
+	</insert>
+
+</mapper>

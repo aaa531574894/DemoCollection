@@ -24,6 +24,7 @@
 		<module>demo-rabbitmq</module>
 		<module>demo-jpa</module>
 		<module>demo-spring</module>
+		<module>demo-mybatis-plus</module>
 	</modules>
 
 

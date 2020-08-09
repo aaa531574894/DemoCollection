@@ -1,0 +1,24 @@
+spring:
+  #数据源a 配置
+  primary-datasource:
+    jdbc-url: jdbc:mysql://localhost:3306/world?useUnicode=true&characterEncoding=UTF-8
+    username: test_mysql_a
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  #数据源b配置
+  secondary-datasource:
+    jdbc-url: jdbc:mysql://localhost:3306/test_db_b?useUnicode=true&characterEncoding=UTF-8
+    username: test_mysql_b
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+
+
+##分页插件配置
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+

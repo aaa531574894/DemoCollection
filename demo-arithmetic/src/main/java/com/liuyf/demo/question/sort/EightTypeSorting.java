@@ -1,5 +1,8 @@
 package com.liuyf.demo.question.sort;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.Random;
 
 /**
@@ -15,11 +18,11 @@ public class EightTypeSorting {
 
     public static void main(String[] args) {
 
-        int length = 50;
-        int[] testData2 = new int[length];
+        int    length       = 30000;
+        int[]  testData2    = new int[length];
         Random randomNumber = new Random();
         for (int i = 0; i < length; i++) {
-            testData2[i] = randomNumber.nextInt(20);
+            testData2[i] = randomNumber.nextInt(50000);
         }
         print(bubbleSort(testData2), print);
         print(insertSort(testData2), print);
@@ -28,7 +31,8 @@ public class EightTypeSorting {
         print(heapSort(testData2), print);
         print(mergingSort(testData2), print);
         print(quickSort(testData2), print);
-        System.out.println(binarySearch(quickSort(testData2),10));
+        print(bucketSort(testData2), print);
+        System.out.println(binarySearch(quickSort(testData2), 10));
     }
 
 
@@ -75,15 +79,15 @@ public class EightTypeSorting {
 
         for (int index = 0; index < sortedArray.length; index++) {
             int toSwapIndex = index;
-            int minmum = sortedArray[index];
+            int minmum      = sortedArray[index];
             for (int current = index + 1; current < sortedArray.length; current++) {
                 if (sortedArray[current] < minmum) {
-                    minmum = sortedArray[current];
+                    minmum      = sortedArray[current];
                     toSwapIndex = current;
                 }
             }
             sortedArray[toSwapIndex] = sortedArray[index];
-            sortedArray[index] = minmum;
+            sortedArray[index]       = minmum;
         }
         long timeCost = System.currentTimeMillis() - beginTime;
         System.out.println("耗时：" + timeCost);
@@ -203,12 +207,13 @@ public class EightTypeSorting {
 
     // end以后的元素已有序，不可再拿出来排序
     private static void adjustChildHeap(int[] fromArray, int changedParentIndex, int end) {
-        int leftChildIndex = leftChildIndex(changedParentIndex);
+        int leftChildIndex  = leftChildIndex(changedParentIndex);
         int rightChildIndex = leftChildIndex + 1;
 
         if (rightChildIndex > end) rightChildIndex = leftChildIndex;
 
-        if (leftChildIndex <= end && Math.max(fromArray[leftChildIndex], fromArray[rightChildIndex]) > fromArray[changedParentIndex]) {
+        if (leftChildIndex <= end && Math.max(fromArray[leftChildIndex],
+                                              fromArray[rightChildIndex]) > fromArray[changedParentIndex]) {
             if (fromArray[leftChildIndex] >= fromArray[rightChildIndex]) {
                 swap(fromArray, leftChildIndex, changedParentIndex);
                 adjustChildHeap(fromArray, leftChildIndex, end);
@@ -259,7 +264,11 @@ public class EightTypeSorting {
     }
 
     // 合并两个子集
-    private static void merge(int[] fromArray, int leftStartIndex, final int leftEndIndex, int rightStartIndex, final int rightEndIndex) {
+    private static void merge(int[] fromArray,
+                              int leftStartIndex,
+                              final int leftEndIndex,
+                              int rightStartIndex,
+                              final int rightEndIndex) {
         final int begin = leftStartIndex;
         if (leftStartIndex == rightEndIndex) return;
         int[] tempResult = new int[rightEndIndex - leftStartIndex + 1];
@@ -301,14 +310,14 @@ public class EightTypeSorting {
         System.arraycopy(fromArray, 0, unsortedArray, 0, unsortedArray.length);
         long beginTime = System.currentTimeMillis();
 
-        quickSort(unsortedArray, 0, unsortedArray.length -1 );
+        quickSort(unsortedArray, 0, unsortedArray.length - 1);
 
         long timeCost = System.currentTimeMillis() - beginTime;
         System.out.println("耗时：" + timeCost);
         return unsortedArray;
     }
 
-    private static void quickSort(int[] fromArray,int startIndex,int endIndex) {
+    private static void quickSort(int[] fromArray, int startIndex, int endIndex) {
         if (startIndex >= endIndex) {
             return;
         }
@@ -317,11 +326,12 @@ public class EightTypeSorting {
         quickSort(fromArray, idx, endIndex);
 
     }
+
     //返回pivot交换位置后的基准索引值
-    private static int compareAndSwap(int[] fromArray,int start,int end){
+    private static int compareAndSwap(int[] fromArray, int start, int end) {
         //在这里将数组第一个元素选取为Pivot
         final int pivot = start;
-        start ++;
+        start++;
         int result = pivot;
         for (; start <= end; ) {
             while (fromArray[start] <= fromArray[pivot] && start != end) {
@@ -331,7 +341,7 @@ public class EightTypeSorting {
                 end--;
             }
             swap(fromArray, start, end);
-            if(start == end) {
+            if (start == end) {
                 result = start;
                 break;
             }
@@ -345,6 +355,50 @@ public class EightTypeSorting {
     }
 
 
+    // 桶排序
+    public static int[] bucketSort(int[] sourceArray) {
+        int[] fromArray = new int[sourceArray.length];
+        System.arraycopy(sourceArray, 0, fromArray, 0, sourceArray.length);
+
+        System.out.println("桶排序");
+        long beginTime = System.currentTimeMillis();
+
+        int min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;
+
+        for (int i = 0; i < fromArray.length; i++) {
+            min = Math.min(min, fromArray[i]);
+            max = Math.max(max, fromArray[i]);
+        }
+
+        final int                     bucketSize = Math.max(1, (max - min) / 100);
+        ArrayList<ArrayList<Integer>> buckets    = new ArrayList<>(bucketSize);
+        for (int i = 0; i < bucketSize; i++) {
+            buckets.add(new ArrayList<>());
+        }
+
+        for (int index = 0; index < fromArray.length; index++) {
+            int fromInt   = fromArray[index];
+            int bucketNum = ((fromInt-min) * bucketSize) / (max - min + 1);
+            buckets.get(bucketNum).add(fromInt);
+        }
+
+        buckets.forEach(Collections::sort);
+        int index = 0;
+        for (Iterator<ArrayList<Integer>> it = buckets.iterator(); it.hasNext(); ) {
+            ArrayList<Integer> bk = it.next();
+            for (Integer integer : bk) {
+                fromArray[index] = integer;
+                index++;
+            }
+        }
+
+
+        long timeCost = System.currentTimeMillis() - beginTime;
+
+        System.out.println("耗时：" + timeCost);
+
+        return fromArray;
+    }
 
 
     private static void print(int[] fromArray, boolean print) {
@@ -362,16 +416,16 @@ public class EightTypeSorting {
     }
 
     // 0 1 2 3 4 5 6  2
-    private static Integer bs(int[] array, int start, int end ,int value) {
-        if(start>end) return null;
+    private static Integer bs(int[] array, int start, int end, int value) {
+        if (start > end) return null;
 
         int middleIndex = (start + end) / 2;
-        if(array[middleIndex] == value) {
+        if (array[middleIndex] == value) {
             return middleIndex;
-        }else if (array[middleIndex] > value) {
-            end = middleIndex-1;
-        }else {
-            start = middleIndex+1;
+        } else if (array[middleIndex] > value) {
+            end = middleIndex - 1;
+        } else {
+            start = middleIndex + 1;
         }
         return bs(array, start, end, value);
     }

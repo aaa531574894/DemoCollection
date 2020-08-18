@@ -18,11 +18,11 @@ public class EightTypeSorting {
 
     public static void main(String[] args) {
 
-        int    length       = 30000;
+        int    length       = 15;
         int[]  testData2    = new int[length];
         Random randomNumber = new Random();
         for (int i = 0; i < length; i++) {
-            testData2[i] = randomNumber.nextInt(50000);
+            testData2[i] = randomNumber.nextInt(10);
         }
         print(bubbleSort(testData2), print);
         print(insertSort(testData2), print);
@@ -32,7 +32,7 @@ public class EightTypeSorting {
         print(mergingSort(testData2), print);
         print(quickSort(testData2), print);
         print(bucketSort(testData2), print);
-        System.out.println(binarySearch(quickSort(testData2), 10));
+        System.out.println(binarySearch(quickSort(testData2), 5));
     }
 
 
@@ -378,7 +378,7 @@ public class EightTypeSorting {
 
         for (int index = 0; index < fromArray.length; index++) {
             int fromInt   = fromArray[index];
-            int bucketNum = ((fromInt-min) * bucketSize) / (max - min + 1);
+            int bucketNum = ((fromInt - min) * bucketSize) / (max - min + 1);
             buckets.get(bucketNum).add(fromInt);
         }
 
@@ -412,7 +412,25 @@ public class EightTypeSorting {
 
 
     public static Integer binarySearch(int[] array, int value) {
-        return bs(array, 0, array.length - 1, value);
+        //return bs(array, 0, array.length - 1, value);
+        int left = 0, right = array.length - 1;
+
+        Integer result = null;
+
+        while (left <= right) {
+            int middle = (left + right) / 2;
+            int middleVal;
+            if ((middleVal = array[middle]) == value) {
+                result = middle;
+                break;
+            } else if (middleVal > value) {
+                right = middle - 1;
+            } else {
+                left = middle + 1;
+            }
+        }
+        return result;
+
     }
 
     // 0 1 2 3 4 5 6  2

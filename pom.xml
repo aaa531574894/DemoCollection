@@ -25,6 +25,7 @@
 		<module>demo-jpa</module>
 		<module>demo-spring</module>
 		<module>demo-mybatis-plus</module>
+		<module>demo-image-compression</module>
 	</modules>
 
 
